@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VISIT BANJARNEGARA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  
+  <script src="js/lapbulanan.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/intabara.css" />
+</head>
+<body class='intabara' onLoad=pgInit();>
+  <div class='content-fluid'>
+	  <div class='ipb-header'>
+		  <div class='ipb-header-content'>
+		     <img src='img/logobna.png' height="50px">
+		  </div>
+		  <div class='ipb-header-content restwidth'>
+		    <p class='p2'>PARIWISATA BANJARNEGARA</p>
+		    <p class='p1'>DALAM STATISTIK</p>
+		  </div>
+	  </div>
+	  <div class="ipb-body">
+		 <div class='menu-title'>LAPORAN PER BULAN</div>
+		 <div style='margin: 5px 0 5px 0;'>
+			 <div class='separoan'>
+			    <button class='tmbl tmbl-naval' id='sow'>SEMUA OBJ WISATA</button>
+			 </div>
+			 <div class='separoan'>
+			    <button class='tmbl tmbl-naval' id='pow'>PER OBJ WISATA</button>
+			 </div>
+		 </div>
+		 <select id='bllapor' class='form-control'></select>
+		 <select id='owlapor' class='form-control'></select>
+		 <div id="lapbulanan"></div>
+		 
+		 <div class='nav-back'><a href='./index.html'>Halaman Induk</a></div>
+	  </div>
+	  <div class='ipb-footer'>
+		  <p>Dinas Pariwisata Kabupaten Banjarnegara</p>
+		  <p>Komunitas Linux Banjarnegara</p>
+		  <p>&copy;2017</p>
+	  </div>
+  </div>
+<script>
+function pgInit(){
+	var dt = new Date();
+	var yr = dt.getFullYear();
+	$('#bllapor option').remove();
+	$('#bllapor').append("<option value=''>Pilih Bulan</option>");
+	$('#bllapor').append("<option value='01,"+yr+"'>Januari "+yr+"</option>");
+	$('#bllapor').append("<option value='02,"+yr+"'>Februari "+yr+"</option>");
+	$('#bllapor').append("<option value='03,"+yr+"'>Maret "+yr+"</option>");
+	$('#bllapor').append("<option value='04,"+yr+"'>April "+yr+"</option>");
+	$('#bllapor').append("<option value='05,"+yr+"'>Mei "+yr+"</option>");
+	$('#bllapor').append("<option value='06,"+yr+"'>Juni "+yr+"</option>");
+	$('#bllapor').append("<option value='07,"+yr+"'>Juli "+yr+"</option>");
+	$('#bllapor').append("<option value='08,"+yr+"'>Agustus "+yr+"</option>");
+	$('#bllapor').append("<option value='09,"+yr+"'>September "+yr+"</option>");
+	$('#bllapor').append("<option value='10,"+yr+"'>Oktober "+yr+"</option>");
+	$('#bllapor').append("<option value='11,"+yr+"'>Nopember "+yr+"</option>");
+	$('#bllapor').append("<option value='12,"+yr+"'>Desember "+yr+"</option>");
+	
+	$.getJSON(serverpage+'?mn=owlap',function(objwis){
+		$('#owlapor option').remove();
+		$.each(objwis,function(index,data){
+			$('#owlapor').append(
+			"<option value='"+data.id+"'>"+data.nama+"</option>"
+			);
+		});
+	});
+}
+</script>
+</body>
+</html>
+
